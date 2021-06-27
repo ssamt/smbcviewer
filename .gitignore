@@ -2,3 +2,4 @@
 static/data
 venv
 db.sqlite3
+smbcviewer.bat

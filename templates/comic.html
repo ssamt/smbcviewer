@@ -16,7 +16,7 @@
                     {% if nav_names.1 %}<a class="cc-prev" rel="prev" href="{% url 'comic' nav_names.1 %}"></a>{% endif %}
                     {% if nav_names.2 %}<a class="cc-navaux" href="{% url 'comic' nav_names.2 %}"></a>{% endif %}
                     {% if nav_names.3 %}<a class="cc-next" rel="next" href="{% url 'comic' nav_names.3 %}"></a>{% endif %}
-                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'comic' nav_names.4 %}"></a>{% endif %}
+                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'main' %}"></a>{% endif %}
                 </nav>
             </div>
             <div id="cc-comicbody">
@@ -28,7 +28,7 @@
                     {% if nav_names.1 %}<a class="cc-prev" rel="prev" href="{% url 'comic' nav_names.1 %}"></a>{% endif %}
                     {% if nav_names.2 %}<a class="cc-navaux" href="{% url 'comic' nav_names.2 %}"></a>{% endif %}
                     {% if nav_names.3 %}<a class="cc-next" rel="next" href="{% url 'comic' nav_names.3 %}"></a>{% endif %}
-                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'comic' nav_names.4 %}"></a>{% endif %}
+                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'main' %}"></a>{% endif %}
                 </nav>
                 <a id="extracomic" onclick='toggleBlock("aftercomic")' class="mobilehide"></a>
                 <div id="aftercomic" onclick='toggleBlock("aftercomic")' style="display:none;" class="mobilehide">
