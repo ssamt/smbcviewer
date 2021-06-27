@@ -1,0 +1,4 @@
+.idea
+static/data
+venv
+db.sqlite3

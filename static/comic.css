@@ -1,0 +1,72 @@
+#navtop {
+    margin: 0 auto;
+    width: 578px;
+}
+#navbottom {
+	width: 678px;
+	position: relative;
+	margin: 0 auto;
+	height: 94px;
+}
+#comicleft {
+    float: left;
+    width: 725px;
+}
+#cc-comic {
+    margin: 0 auto;
+    margin-top: 0px;
+}#cc-comicbody {
+    width: 725px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+#cc-comicbody {
+    position: relative;
+}
+.cc-nav {
+    height: 79px;
+    width: 678px;
+    margin-bottom: 15px;
+    clear: both;
+    position: relative;
+}
+.cc-nav a {
+    height: 79px;
+    float: left;
+    display: block;
+}
+.cc-first {
+    width: 102px;
+    background: url("image/first.png");
+}
+.cc-prev {
+    width: 79px;
+    background: url("image/prev.png");
+}
+.cc-navaux {
+    width: 218px;
+    background: url("image/random.png");
+}
+.cc-next {
+    width: 79px;
+    background: url("image/next.png");
+}
+.cc-last {
+    width: 102px;
+    background: url("image/last.png");
+}
+#extracomic {
+    width: 102px;
+    background: url("image/button.png");
+    position: relative;
+    left: 590px;
+    top: -90px;
+    height: 79px;
+    display: block;
+}
+#aftercomic {
+    position: absolute;
+    z-index: 50;
+    right: 0px;
+    top: 70px;
+}
