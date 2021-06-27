@@ -15,7 +15,7 @@ def smbc_view(request, name=None):
         soup = BeautifulSoup(response.text, 'html.parser')
         name = get_name(get_permalink(soup))
     data_folder = f'{BASE_DIR}/static/data'
-    if not os.path.isfile(data_folder):
+    if not os.path.isdir(data_folder):
         os.makedirs(data_folder)
     folder = f'{BASE_DIR}/static/data/{name}'
     comic_path = f'{folder}/comic.png'
