@@ -12,27 +12,27 @@
         <div id="comicleft">
             <div id="navtop">
                 <nav class="cc-nav" role="navigation">
-                    {% if nav_names.0 %}<a class="cc-first" rel="first" href="{% url 'comic' nav_names.0 %}"></a>{% endif %}
-                    {% if nav_names.1 %}<a class="cc-prev" rel="prev" href="{% url 'comic' nav_names.1 %}"></a>{% endif %}
-                    {% if nav_names.2 %}<a class="cc-navaux" href="{% url 'comic' nav_names.2 %}"></a>{% endif %}
-                    {% if nav_names.3 %}<a class="cc-next" rel="next" href="{% url 'comic' nav_names.3 %}"></a>{% endif %}
-                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'main' %}"></a>{% endif %}
+                    <a class="cc-first" rel="first" href="{% url 'first'%}"></a>
+                    {% if page.prev %}<a class="cc-prev" rel="prev" href="{% url 'comic' page.prev %}"></a>{% endif %}
+                    <a class="cc-navaux" href="{% url 'random' %}"></a>
+                    {% if page.next %}<a class="cc-next" rel="next" href="{% url 'comic' page.next %}"></a>{% endif %}
+                    <a class="cc-last" rel="last" href="{% url 'main' %}"></a>
                 </nav>
             </div>
             <div id="cc-comicbody">
-                <img title="{{ title_text }}" src="{% static 'data/'|add:name|add:'/comic.png' %}" id="cc-comic">
+                <img title="{{ page.title_text }}" src="{{ page.comic.url }}" id="cc-comic">
             </div>
             <div id="navbottom">
                 <nav class="cc-nav" role="navigation">
-                    {% if nav_names.0 %}<a class="cc-first" rel="first" href="{% url 'comic' nav_names.0 %}"></a>{% endif %}
-                    {% if nav_names.1 %}<a class="cc-prev" rel="prev" href="{% url 'comic' nav_names.1 %}"></a>{% endif %}
-                    {% if nav_names.2 %}<a class="cc-navaux" href="{% url 'comic' nav_names.2 %}"></a>{% endif %}
-                    {% if nav_names.3 %}<a class="cc-next" rel="next" href="{% url 'comic' nav_names.3 %}"></a>{% endif %}
-                    {% if nav_names.4 %}<a class="cc-last" rel="last" href="{% url 'main' %}"></a>{% endif %}
+                    <a class="cc-first" rel="first" href="{% url 'first'%}"></a>
+                    {% if page.prev %}<a class="cc-prev" rel="prev" href="{% url 'comic' page.prev %}"></a>{% endif %}
+                    <a class="cc-navaux" href="{% url 'random' %}"></a>
+                    {% if page.next %}<a class="cc-next" rel="next" href="{% url 'comic' page.next %}"></a>{% endif %}
+                    <a class="cc-last" rel="last" href="{% url 'main' %}"></a>
                 </nav>
                 <a id="extracomic" onclick='toggleBlock("aftercomic")' class="mobilehide"></a>
                 <div id="aftercomic" onclick='toggleBlock("aftercomic")' style="display:none;" class="mobilehide">
-                    <img src='{% static 'data/'|add:name|add:'/bonus.png' %}'>
+                    <img src='{{ page.bonus.url }}'>
                 </div>
             </div>
         </div>

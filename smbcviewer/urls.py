@@ -19,9 +19,14 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from smbc.views import random_view, first_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('smbc/', include('smbc.urls')),
     path('', RedirectView.as_view(url='smbc/', permanent=False)),
+    path('random', random_view, name='random'),
+    path('first', first_view, name='first'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

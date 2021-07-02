@@ -1,5 +1,5 @@
 .idea
-static/data
+media/*.png
 venv
 db.sqlite3
 smbcviewer.bat
