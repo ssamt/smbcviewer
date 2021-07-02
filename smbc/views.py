@@ -1,14 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-import os.path
 
 from django.shortcuts import render, redirect
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
-
-from smbcviewer.settings import BASE_DIR
-from .models import Page
 
 main_link = 'https://www.smbc-comics.com/'
 comic_link = main_link + 'comic/{}'
@@ -19,34 +15,18 @@ def smbc_view(request, name=None):
         response = requests.get(main_link)
         soup = BeautifulSoup(response.text, 'html.parser')
         name = get_name(get_permalink(soup))
-    find = Page.objects.filter(name=name)
-    if len(find) > 0:
-        page = find[0]
-    else:
-        response = requests.get(comic_link.format(name))
-        soup = BeautifulSoup(response.text, 'html.parser')
-        page = Page(name=name)
-        comic_tag = soup.find('img', {'id':'cc-comic'})
-        comic_image = NamedTemporaryFile()
-        with urlopen(comic_tag['src']) as url:
-            comic_image.write(url.read())
-            comic_image.flush()
-        page.comic.save(name+'.png', File(comic_image))
-        bonus_div = soup.find('div', {'id':'aftercomic'})
-        bonus_tag = bonus_div.find('img')
-        bonus_image = NamedTemporaryFile()
-        with urlopen(bonus_tag['src']) as url:
-            bonus_image.write(url.read())
-            bonus_image.flush()
-        page.bonus.save(name+'_bonus.png', File(bonus_image))
-        class_list = ['cc-prev', 'cc-next']
-        nav_names = [get_name(get_nav_link(soup, c)) for c in class_list]
-        page.prev = nav_names[0]
-        page.next = nav_names[1]
-        title_text = comic_tag['title']
-        page.title_text = title_text
-        page.save()
-    context = {'page': page, 'main_link':main_link}
+    response = requests.get(comic_link.format(name))
+    soup = BeautifulSoup(response.text, 'html.parser')
+    comic_tag = soup.find('img', {'id':'cc-comic'})
+    comic_image_link = comic_tag['src']
+    bonus_div = soup.find('div', {'id':'aftercomic'})
+    bonus_tag = bonus_div.find('img')
+    bonus_image_link = bonus_tag['src']
+    prev_name = get_name(get_nav_link(soup, 'cc-prev'))
+    next_name = get_name(get_nav_link(soup, 'cc-next'))
+    title_text = comic_tag['title']
+    context = {'comic_image_link':comic_image_link, 'bonus_image_link':bonus_image_link,
+               'prev_name':prev_name, 'next_name':next_name, 'title_text':title_text, 'main_link':main_link}
     return render(request, 'comic.html', context)
 
 def random_view(request):

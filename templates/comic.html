@@ -13,26 +13,26 @@
             <div id="navtop">
                 <nav class="cc-nav" role="navigation">
                     <a class="cc-first" rel="first" href="{% url 'first'%}"></a>
-                    {% if page.prev %}<a class="cc-prev" rel="prev" href="{% url 'comic' page.prev %}"></a>{% endif %}
+                    {% if prev_name %}<a class="cc-prev" rel="prev" href="{% url 'comic' prev_name %}"></a>{% endif %}
                     <a class="cc-navaux" href="{% url 'random' %}"></a>
-                    {% if page.next %}<a class="cc-next" rel="next" href="{% url 'comic' page.next %}"></a>{% endif %}
+                    {% if next_name %}<a class="cc-next" rel="next" href="{% url 'comic' next_name %}"></a>{% endif %}
                     <a class="cc-last" rel="last" href="{% url 'main' %}"></a>
                 </nav>
             </div>
             <div id="cc-comicbody">
-                <img title="{{ page.title_text }}" src="{{ page.comic.url }}" id="cc-comic">
+                <img title="{{ title_text }}" src="{{ comic_image_link }}" id="cc-comic">
             </div>
             <div id="navbottom">
                 <nav class="cc-nav" role="navigation">
                     <a class="cc-first" rel="first" href="{% url 'first'%}"></a>
-                    {% if page.prev %}<a class="cc-prev" rel="prev" href="{% url 'comic' page.prev %}"></a>{% endif %}
+                    {% if prev_name %}<a class="cc-prev" rel="prev" href="{% url 'comic' prev_name %}"></a>{% endif %}
                     <a class="cc-navaux" href="{% url 'random' %}"></a>
-                    {% if page.next %}<a class="cc-next" rel="next" href="{% url 'comic' page.next %}"></a>{% endif %}
+                    {% if next_name %}<a class="cc-next" rel="next" href="{% url 'comic' next_name %}"></a>{% endif %}
                     <a class="cc-last" rel="last" href="{% url 'main' %}"></a>
                 </nav>
                 <a id="extracomic" onclick='toggleBlock("aftercomic")' class="mobilehide"></a>
                 <div id="aftercomic" onclick='toggleBlock("aftercomic")' style="display:none;" class="mobilehide">
-                    <img src='{{ page.bonus.url }}'>
+                    <img src='{{ bonus_image_link }}'>
                 </div>
             </div>
         </div>
