@@ -1,7 +1,7 @@
 from django.db import models
 from .links import comic_link
 
-scores = [(i, f'{i}/5') for i in range(1, 6)]
+scores = [(0, '----')] + [(i, f'{i}/5') for i in range(1, 6)]
 
 class Comic(models.Model):
     name = models.CharField(max_length=50)
