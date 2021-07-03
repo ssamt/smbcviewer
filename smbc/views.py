@@ -1,14 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
 
 from django.shortcuts import render, redirect
-from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
 
-main_link = 'https://www.smbc-comics.com/'
-comic_link = main_link + 'comic/{}'
-random_link = main_link + 'rand.php'
+from .forms import EvalComic
+from .models import Comic
+from .links import main_link, comic_link, random_link
 
 def smbc_view(request, name=None):
     if not name:
@@ -25,8 +22,29 @@ def smbc_view(request, name=None):
     prev_name = get_name(get_nav_link(soup, 'cc-prev'))
     next_name = get_name(get_nav_link(soup, 'cc-next'))
     title_text = comic_tag['title']
+    if request.method == 'POST':
+        find = Comic.objects.filter(name=name)
+        if len(find) > 0:
+            comic_obj = find[0]
+        else:
+            comic_obj = Comic(name=name)
+        comic_obj.score = request.POST.get('score')
+        comic_obj.hide = request.POST.get('hide') == 'on'
+        comic_obj.save()
+        form = EvalComic(request.POST)
+        hide = comic_obj.hide
+    else:
+        find = Comic.objects.filter(name=name)
+        if len(find) > 0:
+            comic_obj = find[0]
+            form = EvalComic(initial={'score':comic_obj.score, 'hide':comic_obj.hide})
+            hide = comic_obj.hide
+        else:
+            form = EvalComic()
+            hide = False
     context = {'comic_image_link':comic_image_link, 'bonus_image_link':bonus_image_link,
-               'prev_name':prev_name, 'next_name':next_name, 'title_text':title_text, 'main_link':main_link}
+               'prev_name':prev_name, 'next_name':next_name, 'title_text':title_text, 'main_link':main_link,
+               'form':form, 'hide':hide}
     return render(request, 'comic.html', context)
 
 def random_view(request):

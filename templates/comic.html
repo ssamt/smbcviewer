@@ -20,7 +20,8 @@
                 </nav>
             </div>
             <div id="cc-comicbody">
-                <img title="{{ title_text }}" src="{{ comic_image_link }}" id="cc-comic">
+                <div onclick="showComic()" id="hidden" {% if not hide %}style="display: none"{% endif %}>This comic was hidden.</div>
+                <img title="{{ title_text }}" src="{{ comic_image_link }}" id="cc-comic" {% if hide %}style="display: none"{% endif %}>
             </div>
             <div id="navbottom">
                 <nav class="cc-nav" role="navigation">
@@ -35,6 +36,11 @@
                     <img src='{{ bonus_image_link }}'>
                 </div>
             </div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Save">
+            </form>
         </div>
     </body>
 </html>

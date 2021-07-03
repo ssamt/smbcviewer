@@ -25,3 +25,7 @@ function toggleBlock(name){
         hideBlock(name);
     }
 }
+function showComic(){
+    hideBlock('hidden')
+    showBlock('cc-comic')
+}
